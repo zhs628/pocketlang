@@ -1892,17 +1892,6 @@ L_do_call:
       DISPATCH();
     }
 
-    OPCODE(RANGE):
-    {
-      // Don't pop yet, we need the reference for gc.
-      Var r = PEEK(-1), l = PEEK(-2);
-      Var result = varOpRange(vm, l, r);
-      DROP(); DROP(); // r, l
-      PUSH(result);
-      CHECK_ERROR();
-      DISPATCH();
-    }
-
     OPCODE(IN):
     {
       // Don't pop yet, we need the reference for gc.

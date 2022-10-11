@@ -1866,24 +1866,6 @@ Var varLesser(PKVM* vm, Var v1, Var v2) {
   return VAR_NULL;
 }
 
-Var varOpRange(PKVM* vm, Var v1, Var v2) {
-  if (IS_NUM(v1) && IS_NUM(v2)) {
-    return VAR_OBJ(newRange(vm, AS_NUM(v1), AS_NUM(v2)));
-  }
-
-  if (IS_OBJ_TYPE(v1, OBJ_STRING)) {
-    String* str = varToString(vm, v2, false);
-    if (str == NULL) return VAR_NULL;
-    String* concat = stringJoin(vm, (String*) AS_OBJ(v1), str);
-    return VAR_OBJ(concat);
-  }
-
-  const bool inplace = false;
-  CHECK_INST_BINARY_OP("..");
-  UNSUPPORTED_BINARY_OP("..");
-  return VAR_NULL;
-}
-
 #undef RIGHT_OPERAND
 #undef CHECK_NUMERIC_OP
 #undef CHECK_BITWISE_OP

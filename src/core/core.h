@@ -127,8 +127,6 @@ Var varEqals(PKVM* vm, Var v1, Var v2);       // Returns v1 == v2.
 Var varGreater(PKVM* vm, Var v1, Var v2);     // Returns v1 > v2.
 Var varLesser(PKVM* vm, Var v1, Var v2);      // Returns v1 < v2.
 
-Var varOpRange(PKVM* vm, Var v1, Var v2);     // Returns v1 .. v2.
-
 // Returns [elem] in [container]. Sets an error if the [container] is not an
 // iterable.
 bool varContains(PKVM* vm, Var elem, Var container);

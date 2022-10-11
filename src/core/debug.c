@@ -673,7 +673,6 @@ void dumpFunctionCode(PKVM* vm, Function* func) {
       case OP_LTEQ:
       case OP_GT:
       case OP_GTEQ:
-      case OP_RANGE:
       case OP_IN:
       case OP_IS:
       case OP_REPL_PRINT:
