@@ -147,3 +147,4 @@ if __name__ == '__main__':
   ## This will enable ANSI codes in windows terminal.
   os.system('')
   main()
+
