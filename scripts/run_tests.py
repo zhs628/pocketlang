@@ -14,7 +14,7 @@ from os.path import (join, abspath, dirname,
 ROOT_PATH = abspath(join(dirname(__file__), ".."))
 
 ## Output debug cli executable path relative to root.
-POCKET_BINARY = "build/Debug/bin/pocket"
+POCKET_BINARY = "pocket"
 
 ## All the test files, relative to root/tests/ directory.
 TEST_SUITE = {
