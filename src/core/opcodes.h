@@ -261,7 +261,6 @@ OPCODE(LTEQ, 0, -1)
 OPCODE(GT, 0, -1)
 OPCODE(GTEQ, 0, -1)
 
-OPCODE(RANGE, 0, -1) //< Pop 2 integer make range push.
 OPCODE(IN, 0, -1)
 OPCODE(IS, 0, -1)
 

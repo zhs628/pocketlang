@@ -59,7 +59,6 @@ typedef enum {
 
   // symbols
   TK_DOT,        // .
-  TK_DOTDOT,     // ..
   TK_COMMA,      // ,
   TK_COLLON,     // :
   TK_SEMICOLLON, // ;
@@ -229,7 +228,6 @@ typedef enum {
   PREC_BITWISE_XOR,   // ^
   PREC_BITWISE_AND,   // &
   PREC_BITWISE_SHIFT, // << >>
-  PREC_RANGE,         // ..
   PREC_TERM,          // + -
   PREC_FACTOR,        // * / %
   PREC_UNARY,         // - ! ~ not
@@ -1126,9 +1124,7 @@ static void lexToken(Compiler* compiler) {
       }
 
       case '.':
-        if (matchChar(parser, '.')) {
-          setNextToken(parser, TK_DOTDOT); // '..'
-        } else if (utilIsDigit(peekChar(parser))) {
+        if (utilIsDigit(peekChar(parser))) {
           eatChar(parser);   // Consume the decimal point.
           eatNumber(compiler); // Consume the rest of the number
           if (parser->has_syntax_error) return;
@@ -1593,7 +1589,6 @@ GrammarRule rules[] = {  // Prefix       Infix             Infix Precedence
   /* TK_EOF        */   NO_RULE,
   /* TK_LINE       */   NO_RULE,
   /* TK_DOT        */ { NULL,          exprAttrib,       PREC_ATTRIB },
-  /* TK_DOTDOT     */ { NULL,          exprBinaryOp,     PREC_RANGE },
   /* TK_COMMA      */   NO_RULE,
   /* TK_COLLON     */   NO_RULE,
   /* TK_SEMICOLLON */   NO_RULE,
@@ -2061,7 +2056,6 @@ static void exprBinaryOp(Compiler* compiler) {
   do { emitOpcode(compiler, opcode); emitByte(compiler, 0); } while (false)
 
   switch (op) {
-    case TK_DOTDOT:   emitOpcode(compiler, OP_RANGE);        break;
     case TK_PERCENT:  EMIT_BINARY_OP_INPLACE(OP_MOD);        break;
     case TK_PLUS:     EMIT_BINARY_OP_INPLACE(OP_ADD);        break;
     case TK_MINUS:    EMIT_BINARY_OP_INPLACE(OP_SUBTRACT);   break;
@@ -2740,7 +2734,6 @@ static bool matchOperatorMethod(Compiler* compiler,
   if (match(compiler, TK_EQEQ))      _RET("==",  1);
   if (match(compiler, TK_GT))        _RET(">",   1);
   if (match(compiler, TK_LT))        _RET("<",   1);
-  if (match(compiler, TK_DOTDOT))    _RET("..",  1);
   if (match(compiler, TK_IN))        _RET("in",  1);
 
   return false;
